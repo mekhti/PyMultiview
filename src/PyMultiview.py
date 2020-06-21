@@ -3,12 +3,14 @@
 
 from PySide2.QtWidgets import QMainWindow, QDesktopWidget, QWidget
 from src.Views.MainWindow.MainWindowLayout import MainWindowLayout
+from src.Controllers.PMConfig import PMConfig
 
 
 class PyMultiview(QMainWindow):
 
-    def __init__(self):
+    def __init__(self, config: PMConfig):
         super(PyMultiview, self).__init__()
+        self.pmConfig = config
         self.setWindowTitle("PyMultiview by Mehdi Mammadov")
         self.setFixedSize(640, 180)
 
@@ -19,14 +21,10 @@ class PyMultiview(QMainWindow):
 
         self.mViewLayout = MainWindowLayout()
         self.mViewLayout.setContentsMargins(20,0,0,0)
-        #self.setLayout(self.mViewLayout)
 
         self.cWidget = QWidget()
         self.cWidget.setLayout(self.mViewLayout)
         self.setCentralWidget(self.cWidget)
-
-
-
 
     def setIcon(self):
         pass
@@ -37,3 +35,5 @@ class PyMultiview(QMainWindow):
         qRect.moveCenter(centerPoint)
         self.move(qRect.topLeft())
 
+    def getPMConfigObject(self) -> PMConfig:
+        return self.pmConfig

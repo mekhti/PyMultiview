@@ -10,7 +10,7 @@ class DisplayConfiguration:
     layout = 0
     streams = list()
 
-    def __init__(self, displayID = 0, deviceID = "", layoutID = 0):
+    def __init__(self, displayID: int = 0, deviceID: str = "", layoutID: int = 0):
         self.id = displayID
         self.device = deviceID
         self.layout = DisplayLayouts(layoutID)

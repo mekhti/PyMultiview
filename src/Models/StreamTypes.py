@@ -23,8 +23,5 @@ class StreamTypes(Enum):
     DVBC = 15
     DVBC2 = 16
 
-    def __init__(self, streamType = FILE):
-        self.value = streamType
-
     def __str__(self):
         return '{0}'.format(self.value)
