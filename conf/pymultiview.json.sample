@@ -1,0 +1,20 @@
+{
+    "AppConfiguration": {},
+    "Displays" : [
+        {
+            "id" : 0,
+            "device" : "",
+            "layoutID" : 0,
+            "streams" : [0, 2, 28, 14]
+        }
+    ],
+    "Streams" : [
+        {
+            "id" : 0,
+            "type" : "HTTP",
+            "streamURI" : "",
+            "streamName" : "",
+            "description" : ""
+        }
+    ]
+}
