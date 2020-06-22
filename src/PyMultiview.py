@@ -8,9 +8,9 @@ from src.Controllers.PMConfig import PMConfig
 
 class PyMultiview(QMainWindow):
 
-    def __init__(self, config: PMConfig):
+    def __init__(self, pmConfig: PMConfig):
         super(PyMultiview, self).__init__()
-        self.pmConfig = config
+        self.pmConfig = pmConfig
         self.setWindowTitle("PyMultiview by Mehdi Mammadov")
         self.setFixedSize(640, 180)
 
@@ -19,7 +19,7 @@ class PyMultiview(QMainWindow):
         self.statusBar().hide()
         self.menuBar().hide()
 
-        self.mViewLayout = MainWindowLayout()
+        self.mViewLayout = MainWindowLayout(self.pmConfig)
         self.mViewLayout.setContentsMargins(20,0,0,0)
 
         self.cWidget = QWidget()

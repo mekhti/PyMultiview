@@ -16,3 +16,25 @@ class DisplayLayouts(Enum):
     def __str__(self):
         return '{0}'.format(self.value)
 
+    def getHCellCount(self, layout: int):
+        return {
+            0: 1,
+            1: 2,
+            2: 3,
+            3: 3,
+            4: 4,
+            5: 5,
+            6: 6
+        }[layout]
+
+    def getVCellCount(self, layout: int):
+        return {
+            0: 1,
+            1: 2,
+            2: 2,
+            3: 3,
+            4: 3,
+            5: 4,
+            6: 5
+        }[layout]
+
