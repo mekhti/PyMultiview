@@ -5,7 +5,8 @@
             "id" : 0,
             "device" : "",
             "layoutID" : 0,
-            "streams" : [0, 1, 2, 3]
+            "streams" : [0, 1, 2, 3],
+            "screenDescription" : "IPTV channels"
         }
     ],
     "Streams" : [

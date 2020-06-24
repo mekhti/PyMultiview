@@ -1,0 +1,5 @@
+
+        # for displayNr in range(QDesktopWidget().screenCount()):
+        #     sizeObject = QDesktopWidget().screenGeometry(displayNr)
+        #     print("Display: " + str(displayNr) + " Screen size : " + str(sizeObject.height()) + "x" + str(
+        #         sizeObject.width()))
