@@ -25,7 +25,8 @@ class PMConfig:
             for nextDisplay in configData['Displays']:
                 currentDisplay = DisplayConfiguration(displayID=nextDisplay['id'],
                                                       deviceID=nextDisplay['device'],
-                                                      layoutID=nextDisplay['layoutID'])
+                                                      layoutID=nextDisplay['layoutID'],
+                                                      screenDescription=nextDisplay['screenDescription'])
                 for nStream in nextDisplay['streams']:
                     currentDisplay.streams.append(nStream)
 
