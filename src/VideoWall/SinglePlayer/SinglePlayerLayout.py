@@ -8,7 +8,7 @@ from src.VideoWall.SinglePlayer.AudioWidget.AudioLayout import AudioLayout
 # from src.Models.StreamConfiguration import StreamConfiguration
 
 
-class SinglePlayerLayout(QtWidgets.QHBoxLayout):
+class SinglePlayerLayout(QtWidgets.QGridLayout):
 
     def __init__(self, pmConfig: PMConfig, streamIndex: int,
                  playerWidth: int, playerHeight: int ):

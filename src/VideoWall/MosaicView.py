@@ -17,7 +17,7 @@ class MosaicView(QDialog):
         self.videoWallLayout = MosaicViewLayout(pmConfig, self)
         self.setLayout(self.videoWallLayout)
         self.setWindowModality(Qt.WindowModality.WindowModal)
-        self.setContentsMargins(0, 0, 0, 0)
+        self.setContentsMargins(1, 1, 1, 1)
         self.setWindowTitle("Mosaic view on display #")
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.setWindowFlags(Qt.FramelessWindowHint)

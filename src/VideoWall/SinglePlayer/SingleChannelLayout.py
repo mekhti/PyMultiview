@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-from PySide2.QtWidgets import QVBoxLayout, QLabel
-from PySide2.QtGui import QFont
-from PySide2.QtCore import QRect
+from PySide2.QtWidgets import QGridLayout
+from PySide2.QtCore import QRect, Qt
 from src.Controllers.PMConfig import PMConfig
-from src.VideoWall.SinglePlayer.SinglePlayerLayout import SinglePlayerLayout
+
+from src.VideoWall.SinglePlayer.SinglePlayerWidget import SinglePlayerWidget
+from src.VideoWall.SinglePlayer.AudioWidget.AudioLayout import AudioLayout
+from src.VideoWall.SinglePlayer.ChannelName import ChannelName
 
 
-class SingleChannelLayout(QVBoxLayout):
+class SingleChannelLayout(QGridLayout):
 
     def __init__(self, pmConfig: PMConfig, streamIndex: int,
                  layoutWidth: int, layoutHeight: int):
@@ -17,14 +19,19 @@ class SingleChannelLayout(QVBoxLayout):
         self.layoutWidth = layoutWidth
         self.layoutHeight = layoutHeight
 
-        self.setContentsMargins(1, 1, 1, 1)
+        self.setContentsMargins(3, 3, 3, 3)
         self.setGeometry(QRect(0, 0, self.layoutWidth, self.layoutHeight))
 
-        self.currentPlayerlayout = SinglePlayerLayout(pmConfig,
-                                                      self.streamIndex, self.layoutWidth,
-                                                      self.layoutHeight - int(self.layoutHeight * 0.2))
-        self.addLayout(self.currentPlayerlayout)
+        self.currentPlayerWidget = SinglePlayerWidget(self.pmConfig, self.pmConfig.streams[streamIndex],
+                                                      self.layoutWidth, self.layoutHeight)
+        self.addWidget(self.currentPlayerWidget, 0, 0)
 
-        self.videoName = QLabel(self.pmConfig.streams[streamIndex].sName)
-        self.videoName.setFont(QFont("Arial", 14))
-        self.addWidget(self.videoName)
+        self.channelNameLabel = ChannelName(self.pmConfig.streams[streamIndex].sName)
+        self.addWidget(self.channelNameLabel, 1, 0, Qt.AlignCenter)
+
+        self.audioLayout = AudioLayout(self.currentPlayerWidget,
+                                       int(self.layoutWidth * 0.05),
+                                       self.layoutHeight)
+
+        self.addLayout(self.audioLayout, 0, 1)
+

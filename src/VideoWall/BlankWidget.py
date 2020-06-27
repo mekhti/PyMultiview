@@ -11,7 +11,7 @@ class BlankWidget(QWidget):
         super(BlankWidget, self).__init__()
         self.widgetWidth = widgetWidth
         self.widgetHeight = widgetHeight
-        self.setContentsMargins(0, 0, 0, 0)
+        self.setContentsMargins(3, 3, 3, 3)
 
         self.imagePixmap = QPixmap("img/source-not-defined.jpg").scaled(self.widgetWidth,
                                                                         self.widgetHeight,
@@ -21,7 +21,7 @@ class BlankWidget(QWidget):
         self.pixmapLabel.setPixmap(self.imagePixmap)
 
         self.pixmapLayout = QHBoxLayout()
-        self.pixmapLayout.setContentsMargins(1, 1, 1, 1)
+        self.pixmapLayout.setContentsMargins(0, 0, 0, 0)
         self.pixmapLayout.addWidget(self.pixmapLabel)
 
         self.setLayout(self.pixmapLayout)

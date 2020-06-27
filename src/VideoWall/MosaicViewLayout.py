@@ -10,6 +10,9 @@ class MosaicViewLayout(QGridLayout):
     channelPlayers = list()
 
     def __init__(self, pmConfig: PMConfig, parentDialogWindow: QDialog):
+        """
+        TODO: Implement parsing display configuration from config file
+        """
         super(MosaicViewLayout, self).__init__()
         self.pmConfig = pmConfig
         self.parentDialogWindow = parentDialogWindow
@@ -17,8 +20,8 @@ class MosaicViewLayout(QGridLayout):
         self.parentDialogWidth = self.parentDialogWindow.width()
         self.parentDialogHeight = self.parentDialogWindow.height()
 
-        self.horizontalCellCount = 3
-        self.verticalCellCount = 3
+        self.horizontalCellCount = 6
+        self.verticalCellCount = 5
 
         self.childLayoutWidth = int(self.parentDialogWidth / self.horizontalCellCount)
         self.childLayoutHeight = int(self.parentDialogHeight / self.verticalCellCount)
@@ -28,7 +31,9 @@ class MosaicViewLayout(QGridLayout):
 
         for x in range(0, len(self.pmConfig.streams)):
             self.channelPlayers.append(
-                SingleChannelLayout(self.pmConfig, x, self.childLayoutWidth, self.childLayoutHeight)
+                SingleChannelLayout(self.pmConfig, x,
+                                    self.childLayoutWidth,
+                                    self.childLayoutHeight)
             )
 
         self.currentIndex = 0
