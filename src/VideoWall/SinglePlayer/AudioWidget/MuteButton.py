@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from uuid import uuid4
 from PySide2.QtWidgets import QPushButton, QStyle
 from PySide2.QtGui import QPixmap, QIcon
 from PySide2.QtCore import Slot, Qt
@@ -8,6 +9,7 @@ from src.VideoWall.SinglePlayer.SinglePlayerWidget import SinglePlayerWidget
 
 
 class MuteButton(QPushButton):
+    objectID = uuid4()
 
     def __init__(self, parentPlayerWidget: SinglePlayerWidget,
                  widgetWidth: int, widgetHeight: int):

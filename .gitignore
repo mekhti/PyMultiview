@@ -72,3 +72,5 @@ Thumbs.db
 *.exe
 
 conf/pymultiview.json
+.idea
+Snippets

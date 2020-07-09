@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import json
+from uuid import uuid4
 from src.Models.AppConfiguration import AppConfiguration
 from src.Models.StreamConfiguration import StreamConfiguration
 from src.Models.DisplayConfiguration import DisplayConfiguration
 
 
 class PMConfig:
+    objectID = uuid4()
     configFileName = ""
     displays = list()
     streams = list()
@@ -53,8 +55,11 @@ class PMConfig:
 
     def getConfigAsText(self) -> str:
         fileDescriptor = open(self.configFileName, 'r')
-        return fileDescriptor.read()
+        fileContent = fileDescriptor.read()
+        fileDescriptor.close()
+        return fileContent
 
     def saveConfigAsText(self, configAsText: str):
         fileDescriptor = open(self.configFileName, 'w')
         fileDescriptor.write(configAsText)
+        fileDescriptor.close()
