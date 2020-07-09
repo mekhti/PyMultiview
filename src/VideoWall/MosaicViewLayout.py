@@ -24,7 +24,7 @@ class MosaicViewLayout(QGridLayout):
         self.parentDialogHeight = self.parentDialogWindow.height()
         self.__initUI__()
 
-        for x in range(0, len(self.pmConfig.streams)):
+        for x in range(len(self.pmConfig.streams)):
             self.channelPlayers.append(
                 SingleChannelLayout(self.pmConfig, x,
                                     self.childLayoutWidth,
@@ -32,8 +32,8 @@ class MosaicViewLayout(QGridLayout):
             )
 
         self.currentIndex = 0
-        for row in range(0, self.verticalCellCount):
-            for col in range(0, self.horizontalCellCount):
+        for row in range(self.verticalCellCount):
+            for col in range(self.horizontalCellCount):
                 if self.currentIndex < len(self.channelPlayers):
                     self.addLayout(self.channelPlayers[self.currentIndex], row, col)
                     self.currentIndex += 1

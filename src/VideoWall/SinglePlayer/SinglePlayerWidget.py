@@ -42,10 +42,7 @@ class SinglePlayerWidget(QtMultimediaWidgets.QVideoWidget):
 
     @Slot()
     def onMediaStatusChanged(self, currentStatus: StreamPlayer.MediaStatus):
-        if currentStatus == StreamPlayer.UnknownMediaStatus \
-                or currentStatus == StreamPlayer.NoMedia \
-                or currentStatus == StreamPlayer.BufferingMedia:
-            pass
+        pass
 
     # TODO: Implement player stopping when window closed
 
