@@ -12,13 +12,13 @@ from src.VideoWall.SinglePlayer.ChannelName import ChannelName
 
 
 class GScene(QGraphicsScene):
-    objectID = uuid4()
+    objectID = None
 
     def __init__(self, widgetSize: QSize, pmConfig: PMConfig, streamIndex: int):
         super(GScene, self).__init__()
+        self.objectID = uuid4()
         self.pmConfig = pmConfig
         self.widgetSize = widgetSize
-        print("Stream index: ", streamIndex)
         self.videoLostPixmap = QPixmap("img/no-signal.jpg").scaled(self.widgetSize,
                                                                    Qt.AspectRatioMode.IgnoreAspectRatio,
                                                                    Qt.TransformationMode.FastTransformation)
@@ -26,7 +26,6 @@ class GScene(QGraphicsScene):
 
         self.mainVideoItem = GVideoWidget(self.widgetSize, self, self.pmConfig.streams[streamIndex])
         self.addItem(self.mainVideoItem)
-        print("GVideoWidget ID: ", self.mainVideoItem.objectID)
 
         self.muteButtonWidget = self.addWidget(GMuteButton(self.mainVideoItem.getPlayerObject()))
         self.muteButtonWidget.setPos(self.widgetSize.width() - self.muteButtonWidget.size().width() - 10, 10)

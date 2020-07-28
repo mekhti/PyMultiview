@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from uuid import uuid4
 from PySide2 import QtWidgets
 from PySide2.QtCore import Slot
 from src.VideoWall.MosaicWindow import MosaicWindow
@@ -7,9 +8,11 @@ from src.Controllers.PMConfig import PMConfig
 
 
 class LaunchMosaic(QtWidgets.QPushButton):
+    objectID = None
 
     def __init__(self, pmConfig: PMConfig):
         super(LaunchMosaic, self).__init__()
+        self.objectID = uuid4()
         self.pmConfig = pmConfig
         self.initUI()
         self.clicked.connect(lambda: self.launchMosaic())

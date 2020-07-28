@@ -4,7 +4,7 @@ import json
 from src.Models.DisplayLayouts import DisplayLayouts
 
 
-class DisplayConfiguration:
+class DisplayConfiguration(object):
     id = 0
     device = ""
     layout = 0

@@ -8,23 +8,28 @@ from src.Controllers.PMConfig import PMConfig
 from src.VideoWall.SinglePlayer.SingleChannelLayout import SingleChannelLayout
 from src.VideoWall.BlankWidget import BlankWidget
 from src.VideoWall.GToolkit.GView import GView
+from src.VideoWall.SP.SPLayout import SPLayout
+from src.Models.PlayerBackend import PlayerBackend
 
 
 class MosaicViewLayout(QGridLayout):
-    objectID = uuid4()
-    useGToolkit = True
+    objectID = None
     channelPlayers = list()
-    horizontalCellCount = 6
-    verticalCellCount = 5
+    horizontalCellCount = 2
+    verticalCellCount = 2
     childLayoutWidth = 0
     childLayoutHeight = 0
     childWidgetSize = QSize(0, 0)
+
+    def getObjectID(self):
+        return self.objectID
 
     def __init__(self, pmConfig: PMConfig, parentDialogWindow: QWidget):
         """
         TODO: Implement parsing display configuration from config file
         """
         super(MosaicViewLayout, self).__init__()
+        self.objectID = uuid4()
         self.pmConfig = pmConfig
         self.parentDialogWindow = parentDialogWindow
         self.parentDialogWidth = self.parentDialogWindow.width()
@@ -32,26 +37,24 @@ class MosaicViewLayout(QGridLayout):
         self.__initUI__()
 
         for x in range(0, len(self.pmConfig.streams)):
-            print("Stream INDEX: ", x)
-            if self.useGToolkit:
+            if self.pmConfig.appConfiguration.playerBackend == PlayerBackend.GTOOLKIT:
                 self.channelPlayers.append(
                     GView(self.pmConfig, x, self.childWidgetSize)
                 )
-            else:
+            elif self.pmConfig.appConfiguration.playerBackend == PlayerBackend.STANDART_PLAYER:
                 self.channelPlayers.append(
-                    SingleChannelLayout(self.pmConfig, x,
-                                        self.childLayoutWidth,
-                                        self.childLayoutHeight)
+                    SPLayout(self.childWidgetSize, self.pmConfig.streams[x])
                 )
 
         self.currentIndex = 0
         for row in range(0, self.verticalCellCount):
             for col in range(0, self.horizontalCellCount):
                 if self.currentIndex < len(self.channelPlayers):
-                    if self.useGToolkit:
+                    if self.pmConfig.appConfiguration.playerBackend == PlayerBackend.GTOOLKIT:
                         self.addWidget(self.channelPlayers[self.currentIndex], row, col)
-                    else:
+                    elif self.pmConfig.appConfiguration.playerBackend == PlayerBackend.STANDART_PLAYER:
                         self.addLayout(self.channelPlayers[self.currentIndex], row, col)
+
                     self.currentIndex += 1
                 else:
                     self.addWidget(BlankWidget(self.childLayoutWidth, self.childLayoutHeight), row, col)

@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from uuid import uuid4
 from PySide2 import QtWidgets
 from PySide2.QtCore import Slot
 
 
 class DiscardChangesButton(QtWidgets.QPushButton):
+    objectID = None
 
     def __init__(self, parentDialog: QtWidgets.QDialog):
         super(DiscardChangesButton, self).__init__()
+        self.objectID = uuid4()
         self.parentDescriptor = parentDialog
         self.setText("Discard changes and close")
         self.setFixedSize(250, 30)

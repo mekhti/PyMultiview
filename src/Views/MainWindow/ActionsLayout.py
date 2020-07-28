@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from uuid import uuid4
 from PySide2.QtWidgets import QVBoxLayout
 from src.Views.MainWindow.CBoxLayout import CBoxLayout
 from src.Views.MainWindow.EditConfigButton import EditConfigButton
@@ -9,9 +10,11 @@ from src.Controllers.PMConfig import PMConfig
 
 
 class ActionsLayout(QVBoxLayout):
+    objectID = None
 
     def __init__(self, pmConfig: PMConfig):
         super(ActionsLayout, self).__init__()
+        self.objectID = uuid4()
         self.pmConfig = pmConfig
 
         self.setContentsMargins(0,0,0,0)

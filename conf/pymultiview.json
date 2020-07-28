@@ -1,5 +1,7 @@
 {
-    "AppConfiguration": {},
+    "AppConfiguration": {
+        "PlayerBackend": "GTOOLKIT"
+    },
     "Displays" : [
         {
             "id" : 0,
@@ -28,14 +30,14 @@
             "id" : 2,
             "type" : "HLS",
             "streamURI" : "https://streams.livetv.az/azerbaijan/ictimai_stream2/playlist.m3u8",
-            "streamName" : "IctimaiTV",
+            "streamName" : "İctimai TV",
             "description" : ""
         },
         {
             "id" : 3,
             "type" : "HLS",
             "streamURI" : "https://streams.livetv.az/azerbaijan/xazar_sd_stream_2/playlist.m3u8",
-            "streamName" : "XezerTV",
+            "streamName" : "Xəzər TV",
             "description" : ""
         }
     ]

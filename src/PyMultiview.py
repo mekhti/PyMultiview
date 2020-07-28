@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+from uuid import uuid4
 from PySide2.QtWidgets import QMainWindow, QDesktopWidget, QWidget
 from src.Views.MainWindow.MainWindowLayout import MainWindowLayout
 from src.Controllers.PMConfig import PMConfig
 
 
 class PyMultiview(QMainWindow):
+    objectID = None
 
     def __init__(self, pmConfig: PMConfig):
         super(PyMultiview, self).__init__()
+        self.objectID = uuid4()
         self.pmConfig = pmConfig
         self.setWindowTitle("PyMultiview by Mehdi Mammadov")
         self.setFixedSize(640, 180)

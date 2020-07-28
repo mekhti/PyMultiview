@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import json
-
+from uuid import uuid4
 from PySide2.QtWidgets import QMainWindow, QDesktopWidget
 from PySide2.QtCore import Qt, QSize
 
@@ -10,12 +10,14 @@ from src.VideoWall.MosaicWindowWidget import MosaicWindowWidget
 
 
 class MosaicWindow(QMainWindow):
+    objectID = None
 
     def __init__(self, pmConfig: PMConfig, screenID: int = 0):
         """
                 TODO: Implement parsing display configuration from config file
         """
         super(MosaicWindow, self).__init__()
+        self.objectID = uuid4()
         self.pmConfig = pmConfig
         self.screenID = screenID
         self.selectedScreenGeometry = QDesktopWidget().screenGeometry(self.screenID)

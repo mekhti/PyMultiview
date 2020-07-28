@@ -8,10 +8,11 @@ from src.VideoWall.GToolkit.GPlayer import GPlayer
 
 
 class GMuteButton(QLabel):
-    objectID = uuid4()
+    objectID = None
 
     def __init__(self, parentPlayer: GPlayer):
         super(GMuteButton, self).__init__()
+        self.objectID = uuid4()
         self.parentPlayer = parentPlayer
         self.setPixmap(QPixmap("img/mute-red.png"))
         self.setStyleSheet(

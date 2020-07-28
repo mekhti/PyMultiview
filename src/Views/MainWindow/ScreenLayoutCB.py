@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from uuid import uuid4
 from PySide2 import QtWidgets
 from PySide2 import QtCore
 
 
 class ScreenLayoutCB(QtWidgets.QComboBox):
+    objectID = None
 
     def __init__(self):
         super(ScreenLayoutCB, self).__init__()
+        self.objectID = uuid4()
         self.setAutoCompletion(False)
         self.setFixedSize(QtCore.QSize(100, 30))
 

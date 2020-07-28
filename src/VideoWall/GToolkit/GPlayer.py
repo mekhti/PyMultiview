@@ -10,18 +10,19 @@ from src.Controllers.LinkChecker import LinkChecker
 
 
 class GPlayer(QMediaPlayer):
-    objectID = uuid4()
+    objectID = None
     semaphore = False
     attempt = 0
-    mediaPlaylist = QMediaPlaylist()
-    lcDispatcher = LinkChecker()
+    mediaPlaylist = None
+    lcDispatcher = None
 
     def __init__(self, parent, inputStream: StreamConfiguration):
         super(GPlayer, self).__init__()
+        self.objectID = uuid4()
+        self.lcDispatcher = LinkChecker()
         self.parentVideoWidgetItem = parent
         self.inputStream = inputStream
-        print("Input stream URL: ", self.inputStream.sURI)
-
+        self.mediaPlaylist = QMediaPlaylist()
         self.lcDispatcher.setInputStream(self.inputStream)
         self.setMuted(True)
         # self.stateChanged.connect(lambda: self.videoStateChanged())
@@ -29,8 +30,6 @@ class GPlayer(QMediaPlayer):
         self.error.connect(lambda: self.errorHandler(self.errorString()))
         self.mediaStatusChanged.connect(lambda: self.mStatusChanged())
         self.__initPlayer__()
-        print("Network configuration: ", str(self.currentNetworkConfiguration()))
-        print("INURL: ", self.mediaPlaylist.currentMedia().canonicalUrl())
         self.play()
 
     def __initPlayer__(self):
@@ -66,12 +65,10 @@ class GPlayer(QMediaPlayer):
         if not self.semaphore:
             self.semaphore = True
             if self.state() != QMediaPlayer.PlayingState:
-                print("Inside of videoStateChanged")
                 while not self.lcDispatcher.dispatcher():
                     sleep(5)
                 if self.media().isNull():
                     self.setMedia(QUrl(self.inputStream.sURI))
-            print("Ready to play")
             sleep(5)
             self.play()
             self.semaphore = False
@@ -80,20 +77,18 @@ class GPlayer(QMediaPlayer):
     def vsc(self):
         if self.state() == QMediaPlayer.StoppedState:
             # self.stop()
-            print(self.attempt, "Stopped state...")
             self.attempt += 1
             sleep(5)
             self.play()
         elif self.state() == QMediaPlayer.PausedState:
             self.stop()
-            print(self.attempt, "Paused state...")
             self.attempt += 1
             sleep(5)
             self.play()
 
     @Slot()
     def mStatusChanged(self):
-        print(str(self.mediaStatus()))
+        pass
 
 
 """

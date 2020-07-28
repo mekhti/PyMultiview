@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from uuid import uuid4
 from PySide2 import QtWidgets
 from PySide2.QtCore import Slot
 from src.Views.ConfigEditor.TextEditorArea import TextEditorArea
@@ -7,9 +8,11 @@ from src.Controllers.PMConfig import PMConfig
 
 
 class SaveConfigButton(QtWidgets.QPushButton):
+    objectID = None
 
     def __init__(self, parentDialog: QtWidgets.QDialog, textEditor: TextEditorArea):
         super(SaveConfigButton, self).__init__()
+        self.objectID = uuid4()
         self.parentDescriptor = parentDialog
         self.textEditorArea = textEditor
         self.setText("Save changes and close")

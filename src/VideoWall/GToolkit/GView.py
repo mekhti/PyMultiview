@@ -10,13 +10,13 @@ from src.VideoWall.GToolkit.GScene import GScene
 
 
 class GView(QGraphicsView):
-    objectID = uuid4()
+    objectID = None
 
     def __init__(self, pmConfig: PMConfig, streamIndex: int, widgetSize: QSize):
         super(GView, self).__init__()
+        self.objectID = None
         self.pmConfig = pmConfig
         self.streamIndex = streamIndex
-        print("GView ID: ", self.objectID)
 
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)

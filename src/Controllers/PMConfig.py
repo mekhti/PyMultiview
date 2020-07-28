@@ -8,21 +8,21 @@ from src.Models.DisplayConfiguration import DisplayConfiguration
 
 
 class PMConfig:
-    objectID = uuid4()
+    objectID = None
     configFileName = ""
+    appConfiguration = dict()
     displays = list()
     streams = list()
 
     def __init__(self, filename: str ="conf/pymultiview.json"):
+        self.objectID = uuid4()
         self.configFileName = filename
         self.readConfig()
 
     def readConfig(self):
-        with open(self.configFileName) as jsonContentOfConfig:
+        with open(self.configFileName, 'r', encoding='utf-8') as jsonContentOfConfig:
             configData = json.load(jsonContentOfConfig)
-
-            # TODO: Implement application configuration parsing
-            self.appConfiguration = AppConfiguration() #configData['AppConfiguration']
+            self.appConfiguration = AppConfiguration(playerBackend=configData['AppConfiguration']['PlayerBackend'])
 
             for nextDisplay in configData['Displays']:
                 currentDisplay = DisplayConfiguration(displayID=nextDisplay['id'],
@@ -33,7 +33,7 @@ class PMConfig:
                     currentDisplay.streams.append(nStream)
 
                 self.displays.append(currentDisplay)
-                currentDisplay = None
+                del currentDisplay
 
             for nextStream in configData['Streams']:
                 currentStream = StreamConfiguration(streamID=nextStream['id'],
@@ -42,7 +42,7 @@ class PMConfig:
                                                     streamName=nextStream['streamName'],
                                                     description=nextStream['description'])
                 self.streams.append(currentStream)
-                currentStream=None
+                del currentStream
 
     def writeConfig(self):
         pass
@@ -54,12 +54,12 @@ class PMConfig:
         self.readConfig()
 
     def getConfigAsText(self) -> str:
-        fileDescriptor = open(self.configFileName, 'r')
+        fileDescriptor = open(self.configFileName, 'r', encoding='utf-8')
         fileContent = fileDescriptor.read()
         fileDescriptor.close()
         return fileContent
 
     def saveConfigAsText(self, configAsText: str):
-        fileDescriptor = open(self.configFileName, 'w')
+        fileDescriptor = open(self.configFileName, 'w', encoding='utf-8')
         fileDescriptor.write(configAsText)
         fileDescriptor.close()
